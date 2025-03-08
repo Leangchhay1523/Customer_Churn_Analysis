@@ -1,4 +1,4 @@
-from .base_analysis import BaseAnalysis
+from base_analysis import BaseAnalysis
 
 class CorrelationAnalysis(BaseAnalysis):
     pass
