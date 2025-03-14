@@ -38,7 +38,7 @@ class AgeAnalysis(BaseAnalysis):
 
     # Function to print the churn rate(%) by age group
     def age_churn(self):
-        result = self.df.groupby("Age")["Churn"].mean() * 100
+        result = self.df.groupby("Age", observed=True)["Churn"].mean() * 100
         print(result)
         return result
     
