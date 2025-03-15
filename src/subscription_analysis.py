@@ -38,10 +38,10 @@ class SubscriptionAnalysis(BaseAnalysis):
         churn_not_churn.plot(kind='bar', figsize=(8,6), width=0.8, color=['skyblue', 'lightgreen'])
         
         # Add title and labels
-        plt.title('Churn Rate and Not Churn Rate per Subscription Type')
+        plt.title('Churn Rate and Not Churn Rate of Subscription Type')
         plt.xlabel('Subscription Type')
         plt.ylabel('Percentage (%)')
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=0)
         plt.legend(['Churn Rate', 'Not Churn Rate'])
         plt.ylim(0, 100)
         plt.show()
@@ -51,31 +51,15 @@ class SubscriptionAnalysis(BaseAnalysis):
     def subscription_churn(self):
         return self.df.groupby("Subscription Type")["Churn"].mean() * 100
     
-    # Function to display churn rate which affected by subscription type as a barplot
-    def visual_subscription_churn(self):
-        # Group data by Subscription Type and Churn to get the counts
-        churn_counts = self.df.groupby(["Subscription Type", "Churn"]).size().unstack(fill_value=0)
+    # Function to display a pie chart for subscription types distribution
+    def visual_subscription_distribution(self):
+        # Get the count of each subscription type (combined for churn and non-churn)
+        subscription_counts = self.df["Subscription Type"].value_counts()
         
-        # Create a single pie chart for all subscription types
-        plt.figure(figsize=(8, 8))  # Set the size of the pie chart
-        
-        # Flatten the data and get the counts for churn and not churn
-        labels = []
-        sizes = []
-        colors = []  # Define different colors for each segment
-        color_palette = ['#FFB3B3', '#FFCC99', '#CCFFCC', '#99CCFF', '#FF99FF', '#FFEB99']  # Add more colors if necessary
-        
-        for i, (sub_type, counts) in enumerate(churn_counts.iterrows()):
-            labels.append(f"{sub_type} - Churn")
-            labels.append(f"{sub_type} - Not Churn")
-            sizes.append(counts[1])  # Churn count
-            sizes.append(counts[0])  # Not Churn count
-            colors.append(color_palette[2*i])  # Churn color
-            colors.append(color_palette[2*i+1])  # Not Churn color
-        
-        # Plot the combined pie chart with different colors
-        plt.pie(sizes, labels=labels, colors=colors, autopct="%1.1f%%", startangle=140, wedgeprops={'edgecolor': 'black'})
-        plt.title('Churn Distribution for All Subscription Types')
+        # Plot the pie chart for Subscription Type distribution
+        plt.figure(figsize=(8, 8))
+        plt.pie(subscription_counts, labels=subscription_counts.index, autopct='%1.1f%%', startangle=140, wedgeprops={'edgecolor': 'black'})
+        plt.title('Distribution of Subscription Types')
         plt.show()
 
     # Display all the analysis performance 

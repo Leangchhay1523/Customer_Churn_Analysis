@@ -13,7 +13,6 @@ class ContractAnalysis(BaseAnalysis):
     def contract_ditribution(self):
         return self.df["Contract Length"].value_counts()
     
-    # Function to display contract length distribution as countplot
     def visual_contract_distribution(self):
         # Count the number of churned and not churned customers per contract length
         churn_counts = self.df[self.df["Churn"] == 1]["Contract Length"].value_counts()
@@ -24,29 +23,29 @@ class ContractAnalysis(BaseAnalysis):
         churn_counts = churn_counts.reindex(all_contracts, fill_value=0)  # Fill missing categories with 0
         not_churn_counts = not_churn_counts.reindex(all_contracts, fill_value=0)
 
-        # Combine churn and not churn values into one list
+        # Combine churn and not churn values into one list for pie chart
         values = []
         labels = []
         for length in all_contracts:
-            values.append(not_churn_counts[length])  # First: Not Churned customers
-            labels.append(f"{length} - Not Churn ({not_churn_counts[length]})")
-            values.append(churn_counts[length])  # Second: Churned customers
-            labels.append(f"{length} - Churn ({churn_counts[length]})")
+            total_customers = churn_counts[length] + not_churn_counts[length]
+            values.append(total_customers)
+            labels.append(length)
 
-        # Define colors
-        colors = ['#FFB3B3', '#FFCC99', '#CCFFCC', '#99CCFF', '#FF99FF', '#FFEB99']  # Alternate colors for each category
+        # Define colors for each contract length category
+        colors = ['#FF9999', '#66B2FF', '#FFCC99', '#99FF99', '#FFB3E6']  # Customize colors as needed
 
         # Plot pie chart
         plt.figure(figsize=(8, 8))
-        plt.pie(values, labels=labels, colors=colors, autopct="%1.1f%%", startangle=140, wedgeprops={'edgecolor': 'black'})
+        plt.pie(values, labels=labels, colors=colors, autopct="%1.1f%%", startangle=90, wedgeprops={'edgecolor': 'black'})
 
         # Add title
-        plt.title("Contract Length Distribution (Churn vs Not Churn)")
+        plt.title("Distribution of Customers by Contract Length")
 
         # Show chart
         plt.show()
+    
 
-     # Functino to returns the contract length and churn as percentage   
+     # Function to returns the contract length and churn as percentage   
     def contract_churn(self):
         return self.df.groupby("Contract Length")['Churn'].mean() * 100
     
@@ -104,5 +103,3 @@ if __name__ == "__main__":
     print(contract_analysis)
     contract_analysis.perform_analysis()
     
-
-
