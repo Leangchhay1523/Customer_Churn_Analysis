@@ -9,6 +9,20 @@ import numpy as np
 
 # Payment Delay Analysis Class
 class PaymentDelayAnalysis(BaseAnalysis):
+    # Magic method for string representation
+    def __str__(self):
+        return f"PaymentDelayAnalysis with features: {', '.join(self.features)}"
+
+    # Magic method for containment check (to check if feature exists in the class)
+    def __contains__(self, item):
+        return item in self.features
+    
+    # Constructor to initialize features
+    def __init__(self, data_path):
+        super().__init__(data_path)
+        # Define features for containment check
+        self.features = ['Payment Delay', 'Churn']
+
     # Payment Delay Analysis Method
     def perform_analysis(self):
         # load data set
@@ -28,25 +42,30 @@ class PaymentDelayAnalysis(BaseAnalysis):
         
     # Correlation Visualiaztion Method
     def correlation_visualiation(self, df):
-        # Define figure size of 8 inches by 5 inches
-        plt.figure(figsize = (8, 5))
-        # Create scatter plot
-            # x axis represent value of Payment Delay
-            # y axis represent value of Churn
-            # Transparency level of value 0.5
-        sns.scatterplot(x = df['Payment Delay'], y = df['Churn'], alpha = 0.7)
-        # Scatter plot title
-        plt.title('Scatter Plot: Payment Delay vs. Churn')
-        # label of x axis
-        plt.xlabel('Payment Delay')
-        # label of y axis
-        plt.ylabel('Churn')
-        # Show the plot
+        # Group by Payment Delay and Churn, then count the occurrences
+        payment_delay_churn_count = df.groupby(['Payment Delay', 'Churn']).size().unstack(fill_value=0)
+
+        # Plot a histogram with bars next to each other for each Payment Delay value
+        payment_delay_churn_count.plot(kind='bar', figsize=(10, 6), color=['skyblue', 'lightgreen'], edgecolor='black', width=0.8)
+
+        plt.title('Count of Customers with Payment Delay vs. Churn')
+        plt.xlabel('Payment Delay (months)')
+        plt.ylabel('Customer Count')
+        plt.xticks(rotation=0)
+        plt.legend(['Not Churn', 'Churn'])
         plt.show()
+        
         
 
 
 if __name__ == "__main__": # Testing in the module
-    path = "data/data_500_rec.csv"
+    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
     obj = PaymentDelayAnalysis(path)
+    # __str__ to print the class instance
+    print(obj) 
+    # __contains__ to check if a feature is present
+    print('Payment Delay' in obj)  
+    print('Usage Frequency' in obj) 
     obj.perform_analysis()
+
+     

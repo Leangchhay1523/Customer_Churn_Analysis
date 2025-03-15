@@ -7,14 +7,20 @@ import matplotlib.pyplot as plt
 
 # Tenure analysis class
 class TenureAnalysis(BaseAnalysis):
+    # Magic method for string representation
+    def __str__(self):
+        return f"TenureAnalysis: {len(self.df)} records, Average Tenure: {round(self.df['Tenure'].mean())} months"
+
     # Perform tenure analysis method
     def perform_analysis(self):
+        # Constructor: Initializes the path and data
+        def __init__(self, data_path):
+            super().__init__(data_path)
+            
+
         # Load dataset
         df = self.load_data()
         
-        # Calculate Average of Tenure
-        tenure_average = df["Tenure"].mean()
-        print(f"Average Tenure: {round(tenure_average)} month\n")
         
         # Tenure Distribution
         self.tenure_group_distribution(df)
@@ -64,9 +70,17 @@ class TenureAnalysis(BaseAnalysis):
         plt.xlabel("Tenure Group") # Label of x axis
         plt.ylim(0, 100) # Limit value of y axis (0 to 100)
         plt.show() # Show figure
+
+    # Display number of customers in each tenure group
+    def display_customers_by_group(self, df):
+        tenure_counts = df["Tenure Group"].value_counts()
+        print("\nNumber of customers in each Tenure Group:")
+        print(tenure_counts)
         
 if __name__ == "__main__": # Testing in the module
-    path = "data/data_500_rec.csv" # Data path
+    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv" # Data path
     tenure_analysis_obj = TenureAnalysis(path) # Tenure analysis feature
+    print(tenure_analysis_obj) 
     tenure_analysis_obj.perform_analysis() # Perform tenure analysis
+    
         
