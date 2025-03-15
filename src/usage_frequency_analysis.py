@@ -9,6 +9,11 @@ import matplotlib.pyplot as plt
 
 # Usage frequency analysis class
 class UsageFrequencyAnalysis(BaseAnalysis):
+    # Constructor to initialize features
+    def __init__(self, data_path):
+        super().__init__(data_path)
+        self.features = ['Subscription Type', 'Churn']
+
     # Perform analysis method
     def perform_analysis(self):
         # Load dataset
@@ -68,7 +73,7 @@ class UsageFrequencyAnalysis(BaseAnalysis):
         plt.show() # Display the figure
     
 if __name__ == "__main__": # Testing in the module
-    path = "data/data_500_rec.csv"  # Dataset oath
+    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"  # Dataset oath
     usage_frequency_obj = UsageFrequencyAnalysis(path) # create usage freqeuncy analysis obj
     usage_frequency_obj.perform_analysis()
     

@@ -8,6 +8,14 @@ import matplotlib.pyplot as plt
 
 # Gender Analysis Class
 class GenderAnalysis(BaseAnalysis):
+    # __str__ method to provide a string representation of the object
+    def __str__(self):
+        return f"Gender Analysis with {len(self.df)} records."
+
+    # __contains__ method to check if a gender is present in the dataset
+    def __contains__(self, gender):
+        return gender in self.df["Gender"].values
+
     # Method to perform gender analysis
     def perform_analysis(self):
         # Load dataset
@@ -67,6 +75,13 @@ class GenderAnalysis(BaseAnalysis):
         plt.show() # Dispaly figure
 
 if __name__ == "__main__": # Testing in module
-    path = "data/data_500_rec.csv" # Path to dataset
+    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv" # Path to dataset
     gender_analysis = GenderAnalysis(path)  # Create Gender analysis object
+     # __str__ method
+    print(gender_analysis) 
+    
+    # __contains__ method to check if 'Male' and 'Gay' exist in the dataset
+    print("\nChecking if 'Male' is in the dataset:", 'Male' in gender_analysis)  
+    print("Checking if 'Gay' is in the dataset:", 'Gay' in gender_analysis) 
+    
     gender_analysis.perform_analysis() # Call perform analysis method

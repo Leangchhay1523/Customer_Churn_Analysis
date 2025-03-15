@@ -5,19 +5,27 @@ import pandas as pd
 
 # Class for performing correlation analysis, specifically with relate to Churn
 class CorrelationAnalysis(BaseAnalysis):
+    # Magic method for string representation
+    def __str__(self):
+        return f"CorrelationAnalysis with features: {', '.join(self.features)}"
+
+    # Magic method for containment check
+    def __contains__(self, item):
+        return item in self.features
+
     def __init__(self, data_path):
         # Initialize the class by calling the parent class constructor
         super().__init__(data_path)
 
+        # list of features to analyze their correlation with Churn
+        self.features = ['Age', 'Tenure', 'Usage Frequency', 'Support Calls', 'Payment Delay', 'Total Spend', 'Last Interaction', 'Churn']
+
     def perform_analysis(self):
         # Load the dataset for analysis
         df = self.load_data()
-
-        # list of features to analyze their correlation with Churn
-        features = ['Age', 'Tenure', 'Usage Frequency', 'Support Calls', 'Payment Delay', 'Total Spend', 'Last Interaction', 'Churn']
         
         # Calculate the correlation between the selected features and Churn
-        correlation_churn = df[features].corr()[['Churn']]
+        correlation_churn = df[self.features].corr()[['Churn']]
         print(correlation_churn)
 
         # Call the method to plot the heatmap of the correlation matrix
@@ -33,8 +41,17 @@ class CorrelationAnalysis(BaseAnalysis):
         plt.title("Correlation Matrix with Churn") # Title of the heatmap
         plt.show()
 
+    
+
 if __name__ == "__main__":
     file_path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
     churn_analysis = CorrelationAnalysis(file_path)
     churn_analysis.perform_analysis()
 
+    # using __str__ to print the class instance
+    print(churn_analysis) 
+
+    # Example of using __contains__ to check if a feature is present
+    print('Age' in churn_analysis)
+    print('Gender' in churn_analysis) 
+    

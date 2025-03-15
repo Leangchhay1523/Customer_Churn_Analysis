@@ -6,6 +6,14 @@ import pandas as pd
 
 # Initial Analysis Class
 class InitialAnalysis(BaseAnalysis):
+    # __str__ method to provide a string representation of the object
+    def __str__(self):
+        return f"Initial Analysis of dataset with {len(self.df)} rows and {len(self.df.columns)} columns."
+
+    # __contains__ method to check if a column exists in the dataset
+    def __contains__(self, column_name):
+        return column_name in self.df.columns
+
     # Initial Analysis Method
     def perform_analysis(self):
         # Load Data
@@ -43,6 +51,13 @@ class InitialAnalysis(BaseAnalysis):
         print(f"\nStatistical Summarize:\n {df.describe().T}")
         
 if __name__ == "__main__": # Testing in the module
-    path = "data/data_500_rec.csv"
+    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
     initial_analysis_obj = InitialAnalysis(path)
+
+    # __str__ method
+    print(initial_analysis_obj)  # Will call the __str__ method
+    
+    # __contains__ method to check if a column exists
+    print("\nChecking if 'Gender' column exists:", 'Gender' in initial_analysis_obj) 
+
     initial_analysis_obj.perform_analysis()

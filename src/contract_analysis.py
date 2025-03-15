@@ -3,7 +3,11 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+
 class ContractAnalysis(BaseAnalysis):
+    # __str__ to provide a meaningful string representation of the object
+    def __str__(self):
+        return f"Contract Analysis with {len(self.df)} records"
     
     # Function the contract length distribution 
     def contract_ditribution(self):
@@ -11,11 +15,44 @@ class ContractAnalysis(BaseAnalysis):
     
     # Function to display contract length distribution as countplot
     def visual_contract_distribution(self):
+<<<<<<< HEAD:features_analysis/contract_analysis.py
+        # Count the number of churned and not churned customers per contract length
+        churn_counts = self.df[self.df["Churn"] == 1]["Contract Length"].value_counts()
+        not_churn_counts = self.df[self.df["Churn"] == 0]["Contract Length"].value_counts()
+
+        # Ensure all contract length categories are represented
+        all_contracts = sorted(self.df["Contract Length"].unique())  # Get sorted contract lengths
+        churn_counts = churn_counts.reindex(all_contracts, fill_value=0)  # Fill missing categories with 0
+        not_churn_counts = not_churn_counts.reindex(all_contracts, fill_value=0)
+
+        # Combine churn and not churn values into one list
+        values = []
+        labels = []
+        for length in all_contracts:
+            values.append(not_churn_counts[length])  # First: Not Churned customers
+            labels.append(f"{length} - Not Churn ({not_churn_counts[length]})")
+            values.append(churn_counts[length])  # Second: Churned customers
+            labels.append(f"{length} - Churn ({churn_counts[length]})")
+
+        # Define colors
+        colors = ['#FFB3B3', '#FFCC99', '#CCFFCC', '#99CCFF', '#FF99FF', '#FFEB99']  # Alternate colors for each category
+
+        # Plot pie chart
+        plt.figure(figsize=(8, 8))
+        plt.pie(values, labels=labels, colors=colors, autopct="%1.1f%%", startangle=140, wedgeprops={'edgecolor': 'black'})
+
+        # Add title
+        plt.title("Contract Length Distribution (Churn vs Not Churn)")
+
+        # Show chart
+        plt.show()
+=======
         plt.figure(figsize = (6,4))
         sns.countplot(x = "Contract Length", data = self.df, palette = "coolwarm", order = self.df['Contract Length'].value_counts().index, hue = "Contract Length")
         plt.title("Contract Length Distribution of Customers")
         plt.xlabel("Contract Length")
         plt.ylabel("Count")
+>>>>>>> 74d5067260181f922f9fd29a0a7ee8c521a117c5:src/contract_analysis.py
 
      # Functino to returns the contract length and churn as percentage   
     def contract_churn(self):
@@ -23,12 +60,41 @@ class ContractAnalysis(BaseAnalysis):
     
     # Function to display the contract length and churn rate as a barplot
     def visual_contract_churn(self):
+<<<<<<< HEAD:features_analysis/contract_analysis.py
+        # Get churn rate
+        churn_rate = self.contract_churn()
+        
+        # Calculate not churn rate
+        not_churn_rate = 100 - churn_rate  # Assuming churn_rate is in percentage
+        
+        # Prepare DataFrame for Seaborn
+        churn_data = pd.DataFrame({
+            "Contract Length": churn_rate.index.tolist() * 2,  # Repeat contract lengths
+            "Rate": list(churn_rate) + list(not_churn_rate),  # Churn & Not Churn rates
+            "Type": ["Churn"] * len(churn_rate) + ["Not Churn"] * len(not_churn_rate)  # Labels
+        })
+        
+        # Create bar plot
+        plt.figure(figsize=(8,6))
+        sns.barplot(x="Contract Length", y="Rate", hue="Type", data=churn_data, palette=['skyblue', 'lightgreen'])
+        
+        # Add title and labels
+        plt.title("Churn vs Not Churn Rate by Contract Length")
+=======
         plt.figure(figsize = (6,4))
         sns.barplot(x = self.contract_churn().index, y = self.contract_churn().values, palette = "coolwarm", hue = self.contract_churn().index)
         plt.title("Churn Rate by Contract Length")
+>>>>>>> 74d5067260181f922f9fd29a0a7ee8c521a117c5:src/contract_analysis.py
         plt.xlabel("Contract Length")
-        plt.ylabel("Churn Rate (%)")
+        plt.ylabel("Rate (%)")
         plt.ylim(0, 100)
+        
+        # Show the legend
+        plt.legend(title="Customer Status")
+        
+        # Display plot
+        plt.show()
+        
         
     # Function to display all the performance analysis
     def perform_analysis(self):
@@ -45,11 +111,12 @@ class ContractAnalysis(BaseAnalysis):
         # Display a barplot to show the contract length and churn rate
         self.visual_contract_churn()
 
-        plt.show()
 
 if __name__ == "__main__":
-    data_path = "../data/data_500_rec.csv"
+    data_path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
     contract_analysis = ContractAnalysis(data_path)
+    print(contract_analysis)
     contract_analysis.perform_analysis()
+    
 
 

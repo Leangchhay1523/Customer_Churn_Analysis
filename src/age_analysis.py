@@ -8,13 +8,22 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 class AgeAnalysis(BaseAnalysis):
+    def __init__(self, data_path):
+        super().__init__(data_path)
+    
+    def __str__(self):
+        return f"AgeAnalysis on dataset with {len(self.df)} records"
 
     # Since our dataset contains range of age between 18 - 65 so we need to categorize and initial label of them.
-    # Bellow - [18-->30] : Young, [30-->50]: Middle-aged, [50-->65] : Olders
+    # Below - [18-->30] : Young, [30-->50]: Middle-aged, [50-->65] : Olders
     def categorize_age_groups(self):
         bins = [17, 30, 50, 65]  # Define the age group ranges
         labels = ["Young", "Middle-aged", "Older"]
         self.df["Age Group"] = pd.cut(self.df["Age"], bins=bins, labels=labels, right=True)
+
+        age_counts = self.df['Age Group'].value_counts().sort_index()
+
+        print(age_counts)
 
     # This is the visualization function of churn rate which affected by age groups using matplotlib & seaborn to create barplot
     def visual_age_churn_by_group(self):
@@ -24,11 +33,11 @@ class AgeAnalysis(BaseAnalysis):
         plt.xlabel("Age Group")
         plt.ylabel("Churn Rate (%)")
 
-    # Function to returns the distribution of age         
+    # Function to return the distribution of age         
     def age_distribution(self):
         return self.df["Age"].value_counts()
     
-    # Function to visual the distribution of age frequency uses by using plt and syn libary to create hisplot
+    # Function to visualize the distribution of age frequency using plt and seaborn library to create a histplot
     def visual_age_distribution(self):
         plt.figure(figsize = (8, 5))
         sns.histplot(self.df['Age'], bins = 20, kde = True, color = "blue")
@@ -42,7 +51,7 @@ class AgeAnalysis(BaseAnalysis):
         print(result)
         return result
     
-    # Function to visual the age and churn rateas a boxplot
+    # Function to visualize age and churn rate as a boxplot
     def visual_age_churn(self):
         plt.figure(figsize = (8, 5))
         sns.boxplot(x = 'Churn', y = 'Age', data = self.df, palette = "coolwarm", hue = "Churn")
@@ -57,7 +66,7 @@ class AgeAnalysis(BaseAnalysis):
         print("Running Age Distribution Visualization : ")
         self.visual_age_distribution()
 
-        # Display Churn Rate which affected by age without categorize and print as a boxplot
+        # Display Churn Rate which is affected by age without categorizing and print as a boxplot
         print("Running Churn Rate by Age :")
         self.visual_age_churn()
 
@@ -70,8 +79,12 @@ class AgeAnalysis(BaseAnalysis):
     
         plt.show()
 
-# Driver's code
 if __name__ == "__main__":
+<<<<<<< HEAD:features_analysis/age_analysis.py
+    data_path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
+=======
     data_path = "data/data_500_rec.csv"
+>>>>>>> 74d5067260181f922f9fd29a0a7ee8c521a117c5:src/age_analysis.py
     age_analysis = AgeAnalysis(data_path)
+    print(age_analysis)
     age_analysis.perform_analysis()
