@@ -45,7 +45,7 @@ class ContractAnalysis(BaseAnalysis):
         plt.show()
     
 
-     # Functino to returns the contract length and churn as percentage   
+     # Function to returns the contract length and churn as percentage   
     def contract_churn(self):
         return self.df.groupby("Contract Length")['Churn'].mean() * 100
     
