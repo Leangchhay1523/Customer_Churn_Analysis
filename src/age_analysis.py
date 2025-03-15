@@ -80,11 +80,7 @@ class AgeAnalysis(BaseAnalysis):
         plt.show()
 
 if __name__ == "__main__":
-<<<<<<< HEAD:features_analysis/age_analysis.py
-    data_path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
-=======
     data_path = "data/data_500_rec.csv"
->>>>>>> 74d5067260181f922f9fd29a0a7ee8c521a117c5:src/age_analysis.py
     age_analysis = AgeAnalysis(data_path)
     print(age_analysis)
     age_analysis.perform_analysis()

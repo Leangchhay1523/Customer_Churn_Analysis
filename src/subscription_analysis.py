@@ -24,17 +24,9 @@ class SubscriptionAnalysis(BaseAnalysis):
     
     # Function to display the subscription type distribution as a countplot
     def visual_subscription_distribution(self):
-<<<<<<< HEAD:features_analysis/subscription_analysis.py
         # Calculate the churn rate and not churn rate for each subscription type
         churn_rate = self.df.groupby("Subscription Type")["Churn"].mean() * 100
         not_churn_rate = 100 - churn_rate
-=======
-        plt.figure(figsize = (6,4))
-        sns.countplot(x = "Subscription Type", data = self.df, palette = "coolwarm", hue = "Subscription Type", order = self.df['Subscription Type'].value_counts().index )
-        plt.title("Subscription Type Distribution of Customers")
-        plt.xlabel("Subscription Type")
-        plt.ylabel("Count")
->>>>>>> 74d5067260181f922f9fd29a0a7ee8c521a117c5:src/subscription_analysis.py
         
         # Create a DataFrame for the rates
         churn_not_churn = pd.DataFrame({
@@ -61,7 +53,6 @@ class SubscriptionAnalysis(BaseAnalysis):
     
     # Function to display churn rate which affected by subscription type as a barplot
     def visual_subscription_churn(self):
-<<<<<<< HEAD:features_analysis/subscription_analysis.py
         # Group data by Subscription Type and Churn to get the counts
         churn_counts = self.df.groupby(["Subscription Type", "Churn"]).size().unstack(fill_value=0)
         
@@ -86,15 +77,6 @@ class SubscriptionAnalysis(BaseAnalysis):
         plt.pie(sizes, labels=labels, colors=colors, autopct="%1.1f%%", startangle=140, wedgeprops={'edgecolor': 'black'})
         plt.title('Churn Distribution for All Subscription Types')
         plt.show()
-        
-=======
-        plt.figure(figsize = (6,4))
-        sns.barplot(x = self.subscription_churn().index, y = self.subscription_churn().values, hue = self.subscription_churn().index, palette = "coolwarm")
-        plt.title("Churn Rate by Subscription Type")
-        plt.xlabel("Subscription Type")
-        plt.ylabel("Churn Rate (%)")
-        plt.ylim(0, 100)
->>>>>>> 74d5067260181f922f9fd29a0a7ee8c521a117c5:src/subscription_analysis.py
 
     # Display all the analysis performance 
     def perform_analysis(self):
