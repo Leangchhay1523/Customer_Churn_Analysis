@@ -23,7 +23,7 @@ class SubscriptionAnalysis(BaseAnalysis):
         return self.df["Subscription Type"].value_counts()
     
     # Function to display the subscription type distribution as a countplot
-    def visual_subscription_distribution(self):
+    def visual_subscription_churn(self):
         # Calculate the churn rate and not churn rate for each subscription type
         churn_rate = self.df.groupby("Subscription Type")["Churn"].mean() * 100
         not_churn_rate = 100 - churn_rate
@@ -42,7 +42,7 @@ class SubscriptionAnalysis(BaseAnalysis):
         plt.xlabel('Subscription Type')
         plt.ylabel('Percentage (%)')
         plt.xticks(rotation=0)
-        plt.legend(['Churn Rate', 'Not Churn Rate'])
+        plt.legend(['Churn', 'Not Churn'])
         plt.ylim(0, 100)
         plt.show()
 
@@ -76,7 +76,7 @@ class SubscriptionAnalysis(BaseAnalysis):
 
 
 if __name__ == "__main__":
-    data_path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
+    data_path = "data\data_500_rec.csv"
     subscriptionType_analysis = SubscriptionAnalysis(data_path)
     subscriptionType_analysis.perform_analysis()
 

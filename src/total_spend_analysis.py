@@ -31,7 +31,7 @@ class TotalSpendAnalysis(BaseAnalysis):
 
         # Create boxplot using seaborn
         plt.figure(figsize=(8, 6))
-        sns.boxplot(x='Churn Label', y='Total Spend', data=df, palette='coolwarm')
+        sns.boxplot(x='Churn Label', y='Total Spend', data=df, palette='coolwarm', hue="Churn Label")
 
         # Formatting the graph
         plt.title('Box Plot of Total Spend by Churn Status')
