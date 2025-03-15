@@ -51,8 +51,8 @@ class SubscriptionAnalysis(BaseAnalysis):
     def subscription_churn(self):
         return self.df.groupby("Subscription Type")["Churn"].mean() * 100
     
-    # Function to display a pie chart for subscription types (no churn/separation)
-    def visual_subscription_churn(self):
+    # Function to display a pie chart for subscription types distribution
+    def visual_subscription_distribution(self):
         # Get the count of each subscription type (combined for churn and non-churn)
         subscription_counts = self.df["Subscription Type"].value_counts()
         
