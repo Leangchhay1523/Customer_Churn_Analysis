@@ -39,7 +39,7 @@ class AgeAnalysis(BaseAnalysis):
     # Function to visualize the distribution of age frequency using plt and seaborn library to create a histplot
     def visual_age_distribution(self):
         plt.figure(figsize = (8, 5))
-        sns.histplot(self.df['Age'], bins = 20, kde = True, color = "blue")
+        sns.histplot(self.df['Age'], bins = 20, color = "blue")
         plt.title("Age Distribution of Customers")
         plt.xlabel("Age")
         plt.ylabel("Frequency")
