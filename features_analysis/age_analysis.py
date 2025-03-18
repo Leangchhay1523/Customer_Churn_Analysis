@@ -8,7 +8,7 @@ class AgeAnalysis(BaseAnalysis):
     # Since our dataset contains range of age between 18 - 65 so we need to categorize and initial label of them.
     # Bellow - [18-->30] : Young, [30-->50]: Middle-aged, [50-->65] : Olders
     def categorize_age_groups(self):
-        bins = [18, 30, 50, 65]  # Define the age group ranges
+        bins = [17, 30, 50, 65]  # Define the age group ranges
         labels = ["Young", "Middle-aged", "Older"]
         self.df["Age Group"] = pd.cut(self.df["Age"], bins=bins, labels=labels, right=True)
 
@@ -20,7 +20,7 @@ class AgeAnalysis(BaseAnalysis):
         plt.xlabel("Age Group")
         plt.ylabel("Churn Rate (%)")
 
-    # Function to returns the distribution of age         
+    # Function to returns the distribution of age      
     def age_distribution(self):
         return self.df["Age"].value_counts()
     
@@ -34,7 +34,7 @@ class AgeAnalysis(BaseAnalysis):
 
     # Function to print the churn rate(%) by age group
     def age_churn(self):
-        result = self.df.groupby("Age")["Churn"].mean() * 100
+        result = self.df.groupby("Age", observed=True)["Churn"].mean() * 100
         print(result)
         return result
     
