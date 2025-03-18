@@ -19,8 +19,7 @@ class AgeAnalysis(BaseAnalysis):
     def categorize_age_groups(self):
         bins = [17, 30, 50, 65]  # Define the age group ranges
         labels = ["Young", "Middle-aged", "Older"]
-        self.df["Age Group"] = pd.cut(self.df["Age"], bins=bins, labels=labels, right=True)
-
+        self.df["Age Group"] = pd.cut(self.df["Age"], bins = bins, labels = labels, right = True)
         age_counts = self.df['Age Group'].value_counts().sort_index()
 
         print(age_counts)
@@ -74,7 +73,7 @@ class AgeAnalysis(BaseAnalysis):
         self.categorize_age_groups()
         
         # Display churn rate by age_groups as a barplot
-        print("\nChurn Rate by Age Group:\n", self.df.groupby("Age Group")["Churn"].mean() * 100)
+        print("\nChurn Rate by Age Group:\n", self.df.groupby("Age Group", observed = True)["Churn"].mean() * 100)
         self.visual_age_churn_by_group()
     
         plt.show()
