@@ -98,17 +98,16 @@ Customer_Churn_Analysis/
 ```bash
 git clone https://github.com/Leangchhay1523/Customer_Churn_Analysis.git
 ```
-1. Install dependencies
+2. Install dependencies
 ```bash
 cd Customer_Churn_Analysis
 pip install -r requirements.txt
 ```
-1. Install ``Jupyter`` notebook extension on VSCode
+3. Install ``Jupyter`` notebook extension on VSCode
 	- Open VSCode
-	- Go to **Extensions** and search **Jupyter**
+	- Go to **Extensions**, search **Jupyter** and install it.
 <img src = "public/jupyter_extension.png">
-	- Install it
-1. Run the project on ``main.ipynb``
+4. Run the project on ``main.ipynb``
 
 ## GitHub Link
 - [GitHub Repo](https://github.com/Leangchhay1523/Customer_Churn_Analysis)
