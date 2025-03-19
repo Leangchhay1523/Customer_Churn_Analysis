@@ -75,7 +75,7 @@ class GenderAnalysis(BaseAnalysis):
         plt.show() # Dispaly figure
 
 if __name__ == "__main__": # Testing in module
-    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv" # Path to dataset
+    path = "/data/data_500_rec.csv" # Path to dataset
     gender_analysis = GenderAnalysis(path)  # Create Gender analysis object
      # __str__ method
     print(gender_analysis) 

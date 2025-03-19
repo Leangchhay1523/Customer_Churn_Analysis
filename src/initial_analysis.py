@@ -37,9 +37,6 @@ class InitialAnalysis(BaseAnalysis):
         # Drop CustomerID column
         df = df.drop(columns = "CustomerID")
         
-        # Datatype
-        # print(f"\nData Types:\n {df.dtypes}")
-        
         # Data info
         print("\nData Info:")
         print(df.info())
@@ -51,7 +48,7 @@ class InitialAnalysis(BaseAnalysis):
         print(f"\nStatistical Summarize:\n {df.describe().T}")
         
 if __name__ == "__main__": # Testing in the module
-    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
+    path = "/data/data_500_rec.csv"
     initial_analysis_obj = InitialAnalysis(path)
 
     # __str__ method

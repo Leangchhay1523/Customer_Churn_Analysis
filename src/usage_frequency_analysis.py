@@ -72,7 +72,7 @@ class UsageFrequencyAnalysis(BaseAnalysis):
         plt.show() # Display the figure
     
 if __name__ == "__main__": # Testing in the module
-    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"  # Dataset oath
+    path = "/data/data_500_rec.csv"  # Dataset oath
     usage_frequency_obj = UsageFrequencyAnalysis(path) # create usage freqeuncy analysis obj
     usage_frequency_obj.perform_analysis()
     

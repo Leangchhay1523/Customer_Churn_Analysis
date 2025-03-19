@@ -17,15 +17,23 @@
 
 ## Project Overview
 ### What is Customer Churn?
-Customer churn or customer attritionis the number of existing customers lost, for any reason at all, over a given period of time. It is an important metric for bussinesses metric especially for subscription-based businesses as it impact revenue and growth. 
+Customer Churn or Customer Attritionis the number of existing customers lost, for any reason at all, over a given period of time. It is an important metric for bussinesses metric especially for subscription-based businesses as it impact revenue and growth. 
 ### Objective
 The goal of the project is to analyze customer churn dataset to find key factors that contributing into customer churn.
 ### Key Features
-- Age and Churn Analysis: Define age distribution and analyst churn rate across different age groups.
-- Overall Churn Rate: Calculate total churn rate in the dataset
-- Correlation Analysis: Identify which factors have strongest correlation on churn
-- Churn Rate by Gender: Calculate churn rate between male and female
-- More.. 
+- **Age Analysis:** Create age distribution and analyst churn rate by age group, age is typically divided into 3 categories which are Young, Middle and Old. 
+- **Churn Analysis:** Measuring the overall churn rate in the dataset which usually expressed on percentage.
+- **Contract Length Analysis:** Analyst the impact of contract length on churn rate. It is expressed as Monthly, Annually or Quarterly.
+- **Correlation Analysis:** Discover the overall correlation between all features (age, tenure, support calls, …) and churn rate. 
+- **Gender Analysis:** Analyst churn rate by gender group which are male and female. 
+- **Last Interaction Analysis:** Analyze the correlation between recent interactions and churn rate. Last interaction is typically measured in days. 
+- **Payment Delay Analysis:** Investigate whether payment delays (measured as days or months) serve as an early warning sign for churn.
+- **Subscription Type Analysis:** Examine which subscription plans lead to higher customer engagement and retention. Some subscription plans such as Basic, Standard, Premium.
+- **Support Call Analysis:** Determine if frequency support calls indicate frustration or act as a retention tool for customers. 
+- **Usage Rate Analysis:** Analyze whether the usage rate of customer in period of tenure correlates with churn.
+- **Total Spend Analysis:** Assess whether higher-paying customers are more likely to stay longer. Totals spend is measured in currency. 
+- **Initial Analysis:** Understand the dataset	including structure, checking for nulls. This could help further analysis
+
 
 ### Dataset
 Data Source: [Customer Churn Analysis](https://www.kaggle.com/datasets/muhammadshahidazeem/customer-churn-dataset)

@@ -18,6 +18,18 @@ class SubscriptionAnalysis(BaseAnalysis):
     def __contains__(self, item):
         return item in self.features
     
+    # Display all the analysis performance 
+    def perform_analysis(self):
+        # Display the subscription type distrinbution
+        print(f"\n Subscription Type Distribution : \n{self.subscription_distribution()}")
+        # Display a countplot to show the subscription type distribution
+        self.visual_subscription_distribution()
+        # Display Churn rate which affected by subscription type
+        print(f"\n Churn Rate by Subscription Type :\n {self.subscription_churn()}")
+        self.visual_subscription_churn()
+
+        plt.show()
+    
     # Function to return the subscription distribution 
     def subscription_distribution(self):
         return self.df["Subscription Type"].value_counts()
@@ -35,7 +47,7 @@ class SubscriptionAnalysis(BaseAnalysis):
         })
         
         # Plot the churn rate and not churn rate side by side in a histogram
-        churn_not_churn.plot(kind='bar', figsize=(8,6), width=0.8, color=['skyblue', 'lightgreen'])
+        churn_not_churn.plot(kind = 'bar', figsize = (8,6), width = 0.8, color = ['skyblue', 'lightgreen'])
         
         # Add title and labels
         plt.title('Churn Rate and Not Churn Rate of Subscription Type')
@@ -57,21 +69,9 @@ class SubscriptionAnalysis(BaseAnalysis):
         subscription_counts = self.df["Subscription Type"].value_counts()
         
         # Plot the pie chart for Subscription Type distribution
-        plt.figure(figsize=(8, 8))
-        plt.pie(subscription_counts, labels=subscription_counts.index, autopct='%1.1f%%', startangle=140, wedgeprops={'edgecolor': 'black'})
+        plt.figure(figsize = (8, 8))
+        plt.pie(subscription_counts, labels = subscription_counts.index, autopct = '%1.1f%%', startangle = 140, wedgeprops = {'edgecolor': 'black'})
         plt.title('Distribution of Subscription Types')
-        plt.show()
-
-    # Display all the analysis performance 
-    def perform_analysis(self):
-        # Display the subscription type distrinbution
-        print(f"\n Subscription Type Distribution : \n{self.subscription_distribution()}")
-        # Display a countplot to show the subscription type distribution
-        self.visual_subscription_distribution()
-        # Display Churn rate which affected by subscription type
-        print(f"\n Churn Rate by Subscription Type :\n {self.subscription_churn()}")
-        self.visual_subscription_churn()
-
         plt.show()
 
 

@@ -14,6 +14,26 @@ class AgeAnalysis(BaseAnalysis):
     def __str__(self):
         return f"AgeAnalysis on dataset with {len(self.df)} records"
 
+    # Function to display all the analysis results
+    def perform_analysis(self):
+
+        # Display Age Distribution as a histplot
+        print("Running Age Distribution Visualization : ")
+        self.visual_age_distribution()
+
+        # Display Churn Rate which is affected by age without categorizing and print as a boxplot
+        print("Running Churn Rate by Age :")
+        self.visual_age_churn()
+
+        # Calling the categorize age function 
+        self.categorize_age_groups()
+        
+        # Display churn rate by age_groups as a barplot
+        print("\nChurn Rate by Age Group:\n", self.df.groupby("Age Group", observed = True)["Churn"].mean() * 100)
+        self.visual_age_churn_by_group()
+    
+        plt.show()
+
     # Since our dataset contains range of age between 18 - 65 so we need to categorize and initial label of them.
     # Below - [18-->30] : Young, [30-->50]: Middle-aged, [50-->65] : Olders
     def categorize_age_groups(self):
@@ -46,7 +66,7 @@ class AgeAnalysis(BaseAnalysis):
 
     # Function to print the churn rate(%) by age group
     def age_churn(self):
-        result = self.df.groupby("Age", observed=True)["Churn"].mean() * 100
+        result = self.df.groupby("Age", observed = True)["Churn"].mean() * 100
         print(result)
         return result
     
@@ -57,26 +77,6 @@ class AgeAnalysis(BaseAnalysis):
         plt.title("Age vs. Churn Rate")
         plt.xlabel("Churn (0 = No, 1 = Yes)")
         plt.ylabel("Age")
-    
-    # Function to display all the analysis results
-    def perform_analysis(self):
-
-        # Display Age Distribution as a histplot
-        print("Running Age Distribution Visualization : ")
-        self.visual_age_distribution()
-
-        # Display Churn Rate which is affected by age without categorizing and print as a boxplot
-        print("Running Churn Rate by Age :")
-        self.visual_age_churn()
-
-        # Calling the categorize age function 
-        self.categorize_age_groups()
-        
-        # Display churn rate by age_groups as a barplot
-        print("\nChurn Rate by Age Group:\n", self.df.groupby("Age Group", observed = True)["Churn"].mean() * 100)
-        self.visual_age_churn_by_group()
-    
-        plt.show()
 
 if __name__ == "__main__":
     data_path = "data/data_500_rec.csv"

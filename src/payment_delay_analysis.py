@@ -25,7 +25,7 @@ class PaymentDelayAnalysis(BaseAnalysis):
 
     # Payment Delay Analysis Method
     def perform_analysis(self):
-        # load data set
+        # Load the dataset
         df = self.load_data()
         
         # Calculate payment delay average
@@ -35,37 +35,41 @@ class PaymentDelayAnalysis(BaseAnalysis):
         # Payment Delay and Churn correlation
         # Calculate correlation value between Payment Delay and Churn
         payment_churn_correlation = df["Payment Delay"].corr(df["Churn"])
-        print(f"Correlation between Payment Dela and Churn: {payment_churn_correlation:.2f}")
+        print(f"Correlation between Payment Delay and Churn: {payment_churn_correlation:.2f}")
         
         # Call Scatter plot visualization method
         self.correlation_visualiation(df)
         
-    # Correlation Visualiaztion Method
+    # Correlation Visualization Method
     def correlation_visualiation(self, df):
         # Group by Payment Delay and Churn, then count the occurrences
         payment_delay_churn_count = df.groupby(['Payment Delay', 'Churn']).size().unstack(fill_value=0)
 
         # Plot a histogram with bars next to each other for each Payment Delay value
-        payment_delay_churn_count.plot(kind='bar', figsize=(10, 6), color=['skyblue', 'lightgreen'], edgecolor='black', width=0.8)
+        payment_delay_churn_count.plot(kind = 'bar', figsize = (10, 6), color = ['skyblue', 'lightgreen'], edgecolor = 'black', width = 0.8)
 
         plt.title('Count of Customers with Payment Delay vs. Churn')
         plt.xlabel('Payment Delay (months)')
         plt.ylabel('Customer Count')
-        plt.xticks(rotation=0)
+        plt.xticks(rotation = 0)
         plt.legend(['Not Churn', 'Churn'])
         plt.show()
         
-        
-
-
-if __name__ == "__main__": # Testing in the module
-    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
+# Main execution block for testing the module
+if __name__ == "__main__":
+    # Define the file path to the dataset
+    path = "/data/data_500_rec.csv"
+    
+    # Create an instance of PaymentDelayAnalysis with the specified file path
     obj = PaymentDelayAnalysis(path)
-    # __str__ to print the class instance
-    print(obj) 
-    # __contains__ to check if a feature is present
+    
+    # Print the class instance (__str__ method)
+    print(obj)
+    
+    # Check if a feature is present (__contains__ method)
     print('Payment Delay' in obj)  
     print('Usage Frequency' in obj) 
+    
+    # Perform the payment delay analysis
     obj.perform_analysis()
 
-     

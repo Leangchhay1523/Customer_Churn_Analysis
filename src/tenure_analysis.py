@@ -85,7 +85,7 @@ class TenureAnalysis(BaseAnalysis):
         print(tenure_counts)
         
 if __name__ == "__main__": # Testing in the module
-    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv" # Data path
+    path = "/data/data_500_rec.csv" # Data path
     tenure_analysis_obj = TenureAnalysis(path) # Tenure analysis feature
     print(tenure_analysis_obj) 
     tenure_analysis_obj.perform_analysis() # Perform tenure analysis

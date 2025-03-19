@@ -54,14 +54,14 @@ class SupportCallAnalysis(BaseAnalysis):
         newDataFrame = pd.DataFrame({
             'Support Calls': churn_by_support_calls.index,
             'Churn': churn_by_support_calls.values,
-            'Not Churn': not_churn_by_support_calls.reindex(churn_by_support_calls.index, fill_value=0).values
+            'Not Churn': not_churn_by_support_calls.reindex(churn_by_support_calls.index, fill_value = 0).values
         })
 
         # Melt the DataFrame for use with seaborn's barplot (long format)
-        newDataFrame = newDataFrame.melt(id_vars='Support Calls', value_vars=['Churn', 'Not Churn'],var_name='Churn Status', value_name='Count')
+        newDataFrame = newDataFrame.melt(id_vars = 'Support Calls', value_vars = ['Churn', 'Not Churn'], var_name = 'Churn Status', value_name = 'Count')
 
         # Create barplot to show the average churn rate by support calls
-        sns.barplot(x='Support Calls', y='Count', hue='Churn Status', data=newDataFrame, palette="coolwarm")
+        sns.barplot(x = 'Support Calls', y = 'Count', hue = 'Churn Status', data = newDataFrame, palette = "coolwarm")
         
         # Add title and labels
         plt.title('The amount of Churn and Not Churn by Support Calls')
@@ -73,7 +73,7 @@ class SupportCallAnalysis(BaseAnalysis):
         
 
 if __name__ == "__main__": # Testing in the module
-    path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv" # Data path
+    path = "/data/data_500_rec.csv" # Data path
     support_call_obj = SupportCallAnalysis(path) 
     # __str__ to print the class instance
     print(support_call_obj)  

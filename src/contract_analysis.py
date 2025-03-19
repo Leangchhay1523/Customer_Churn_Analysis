@@ -9,6 +9,21 @@ class ContractAnalysis(BaseAnalysis):
     def __str__(self):
         return f"Contract Analysis with {len(self.df)} records"
     
+    # Function to display all the performance analysis
+    def perform_analysis(self):
+
+        # Dislay the contract length distribution 
+        print(f"\n Contract Length Distribution : \n{self.contract_ditribution()}")
+        
+        # Display a coutplot of contract length distribution
+        self.visual_contract_distribution()
+
+        # Display the churn rate which affect by Contract Length 
+        print(f"\n Churn Rate by Contract Length :\n {self.contract_churn()}")
+
+        # Display a barplot to show the contract length and churn rate
+        self.visual_contract_churn()
+    
     # Function the contract length distribution 
     def contract_ditribution(self):
         return self.df["Contract Length"].value_counts()
@@ -20,8 +35,8 @@ class ContractAnalysis(BaseAnalysis):
 
         # Ensure all contract length categories are represented
         all_contracts = sorted(self.df["Contract Length"].unique())  # Get sorted contract lengths
-        churn_counts = churn_counts.reindex(all_contracts, fill_value=0)  # Fill missing categories with 0
-        not_churn_counts = not_churn_counts.reindex(all_contracts, fill_value=0)
+        churn_counts = churn_counts.reindex(all_contracts, fill_value = 0)  # Fill missing categories with 0
+        not_churn_counts = not_churn_counts.reindex(all_contracts, fill_value = 0)
 
         # Combine churn and not churn values into one list for pie chart
         values = []
@@ -36,7 +51,7 @@ class ContractAnalysis(BaseAnalysis):
 
         # Plot pie chart
         plt.figure(figsize=(8, 8))
-        plt.pie(values, labels=labels, colors=colors, autopct="%1.1f%%", startangle=90, wedgeprops={'edgecolor': 'black'})
+        plt.pie(values, labels = labels, colors = colors, autopct = "%1.1f%%", startangle = 90, wedgeprops = {'edgecolor': 'black'})
 
         # Add title
         plt.title("Distribution of Customers by Contract Length")
@@ -66,7 +81,7 @@ class ContractAnalysis(BaseAnalysis):
         
         # Create bar plot
         plt.figure(figsize=(8,6))
-        sns.barplot(x="Contract Length", y="Rate", hue="Type", data=churn_data, palette=['skyblue', 'lightgreen'])
+        sns.barplot(x = "Contract Length", y = "Rate", hue = "Type", data = churn_data, palette = ['skyblue', 'lightgreen'])
         
         # Add title and labels
         plt.title("Churn vs Not Churn Rate by Contract Length")
@@ -75,30 +90,14 @@ class ContractAnalysis(BaseAnalysis):
         plt.ylim(0, 100)
         
         # Show the legend
-        plt.legend(title="Customer Status")
+        plt.legend(title = "Customer Status")
         
         # Display plot
         plt.show()
-        
-        
-    # Function to display all the performance analysis
-    def perform_analysis(self):
-
-        # Dislay the contract length distribution 
-        print(f"\n Contract Length Distribution : \n{self.contract_ditribution()}")
-        
-        # Display a coutplot of contract length distribution
-        self.visual_contract_distribution()
-
-        # Display the churn rate which affect by Contract Length 
-        print(f"\n Churn Rate by Contract Length :\n {self.contract_churn()}")
-
-        # Display a barplot to show the contract length and churn rate
-        self.visual_contract_churn()
 
 
 if __name__ == "__main__":
-    data_path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
+    data_path = "/data/data_500_rec.csv"
     contract_analysis = ContractAnalysis(data_path)
     print(contract_analysis)
     contract_analysis.perform_analysis()

@@ -36,18 +36,23 @@ class ChurnAnalysis(BaseAnalysis):
 
     def graph(self, churned_count, not_churned_count):
         # Bar chart to compare the number of churned vs non-churned customers
-        plt.bar(['Churned', 'Not Churned'], [churned_count, not_churned_count], color=['red', 'green'])
+        plt.bar(['Churned', 'Not Churned'], [churned_count, not_churned_count], color = ['red', 'green'])
         plt.title('Number of Churned vs Not Churned Customers')
         plt.ylabel('Number of Customers')
         plt.show()
 
         # Pie chart to show the proportion of churned vs non-churned customers
-        plt.pie([churned_count, not_churned_count], labels=['Churned', 'Not Churned'], autopct='%1.1f%%', colors=['red', 'green'])
+        plt.pie([churned_count, not_churned_count], labels = ['Churned', 'Not Churned'], autopct = '%1.1f%%', colors = ['red', 'green'])
         plt.title('Proportion of Churned vs Not Churned Customers')
         plt.axis('equal')
         plt.show()
 
 if __name__ == "__main__":
-    file_path = "d:/year2/term2/python/Project/Customer_Churn_Analysis/data/data_500_rec.csv"
+    # Define the file path to the dataset
+    file_path = "/data/data_500_rec.csv"
+    
+    # Create an instance of ChurnAnalysis with the specified file path
     churn_analysis = ChurnAnalysis(file_path)
+    
+    # Perform the churn analysis
     churn_analysis.perform_analysis()
