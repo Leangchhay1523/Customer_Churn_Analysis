@@ -1,5 +1,6 @@
 from base_analysis import BaseAnalysis
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt  
 
 # Class for analyzing the impact of last customer interaction on churn
@@ -34,22 +35,44 @@ class LastInteractionAnalysis(BaseAnalysis):
         self.visualize_data(df)
 
     def visualize_data(self, df):
-        # Create a bar chart to show the relationship between Last Interaction and Churn
-        # Count the occurrences of each unique Last Interaction time with respect to Churn
-        interaction_churn_counts = df.groupby(["Last Interaction", "Churn"]).size().reset_index(name="Counts")
 
-        # Pivot the data to create separate columns for Churned and Not Churned
-        pivot = interaction_churn_counts.pivot(index="Last Interaction", columns="Churn", values="Counts").fillna(0)
-        
-        # Plotting the bar chart with two bars for each "Last Interaction" category
-        pivot.plot(kind='bar', figsize=(10, 6), color=['#ff9999', '#66b3ff'], width=0.8)
+        # # Create a bar chart to show the relationship between Last Interaction and Churn
+        # # Count the occurrences of each unique Last Interaction time with respect to Churn
+        # interaction_churn_counts = df.groupby(["Last Interaction", "Churn"]).size().reset_index(name="Counts")
 
-        # Adding labels and title
-        plt.title("Impact of Last Interaction on Churn")
-        plt.xlabel("Last Interaction Time")
-        plt.ylabel("Number of Customers")
-        plt.xticks(rotation=45)
-        plt.legend(title="Churn Status", labels=[f"Churn: {col}" for col in pivot.columns])
+        # # Pivot the data to create separate columns for Churned and Not Churned
+        # pivot = interaction_churn_counts.pivot(index="Last Interaction", columns="Churn", values="Counts").fillna(0).reset_index()
+
+        # # Melt the pivot table to long-form for seaborn
+        # melted = pivot.melt(id_vars="Last Interaction", var_name="Churn", value_name="Counts")
+
+        # # Plotting the bar chart with seaborn
+        # plt.figure(figsize=(12, 6))
+        # sns.barplot(data=melted, x="Last Interaction", y="Counts", hue="Churn", palette=['#ff9999', '#66b3ff'], legend=True)
+
+        # # Adding labels and title
+        # plt.title("Impact of Last Interaction on Churn")
+        # plt.xlabel("Last Interaction Time")
+        # plt.ylabel("Number of Customers")
+        # plt.xticks(rotation=45)
+        # plt.tight_layout()
+        # plt.show()
+        # Set the style for the plot
+        custom_palette = {0: '#ff9999', 1: '#66b3ff'}
+        # Create a barplot
+        plt.figure(figsize=(10,6))
+        sns.countplot(x='Last Interaction', hue='Churn', data=df, palette=custom_palette)
+
+        # Modify the hue labels directly
+        plt.legend(title='Churn Status', labels=['Not Churn', 'Churn'])
+
+        # Add titles and labels
+        plt.title('Churn vs Last Interaction', fontsize=16)
+        plt.xlabel('Last Interaction', fontsize=12)
+        plt.ylabel('Frequency', fontsize=12)
+        plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+
+        # Show the plot
         plt.tight_layout()
         plt.show()
 
