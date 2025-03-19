@@ -50,7 +50,7 @@ class GenderAnalysis(BaseAnalysis):
             # df as source of data
             # pastel as color pattern
             # hue specify the colored differently based on Churn status
-        sns.countplot(x = "Gender", data = df, palette = "pastel", hue = "Gender")
+        sns.countplot(x = "Gender", data = df, palette = "viridis", hue = "Gender")
         plt.title("Gender Distribution of Customers") # Title of figure
         plt.xlabel("Gender") # Label for x axis
         plt.ylabel("Count") # Label for y axis
@@ -67,8 +67,8 @@ class GenderAnalysis(BaseAnalysis):
             # hue specify the figure will colored differently based on gender churn rate index
             # coolwarm as color pallete
             # Dispaly the legend
-        sns.barplot(x = gender_churn_rate.index, y = gender_churn_rate.values, hue = gender_churn_rate.index , palette = "coolwarm", legend = True)
-        plt.title("Churn Rate by Tenure Group") # Title of figure
+        sns.barplot(x = gender_churn_rate.index, y = gender_churn_rate.values, hue = gender_churn_rate.index , palette = "rocket", legend = True)
+        plt.title("Churn Rate by Gender Group") # Title of figure
         plt.ylabel("Churn Rate (%)") # Label for y axis
         plt.xlabel("Gender Group") # Label 
         plt.ylim(0, 100) # Set value range for y from 0 to 100 (0% to 100%)

@@ -49,7 +49,7 @@ class LastInteractionAnalysis(BaseAnalysis):
         plt.xlabel("Last Interaction Time")
         plt.ylabel("Number of Customers")
         plt.xticks(rotation=45)
-        plt.legend(title="Churn Status", labels=["Churned", "Not Churned"])
+        plt.legend(title="Churn Status", labels=[f"Churn: {col}" for col in pivot.columns])
         plt.tight_layout()
         plt.show()
 

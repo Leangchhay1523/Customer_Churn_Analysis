@@ -25,15 +25,14 @@ class UsageFrequencyAnalysis(BaseAnalysis):
         
         # Create usage rage group
         self.create_usage_rate_and_group(df)
-        print("\nUsage Rate and Usage Rate Group: ")
-        print(df[["Tenure", "Usage Frequency", "Usage Rate Group"]].head())
+        print(df["Usage Rate Group"].head())
 
         # Churn rate by group
         usage_churn_rate = self.churn_rate_by_group(df)
         print("\n", usage_churn_rate)
         
         # Usage Rate Visualization
-        self.usage_rate_visualization(usage_churn_rate)
+        self.usage_churn_rate_visualization(usage_churn_rate)
         
     # Usage Rate group
     def create_usage_rate_and_group(self, df):
@@ -57,7 +56,7 @@ class UsageFrequencyAnalysis(BaseAnalysis):
         return df.groupby("Usage Rate Group")["Churn"].mean() * 100
     
     # Churn rate group visualization
-    def usage_rate_visualization(self, usage_churn_rate):
+    def usage_churn_rate_visualization(self, usage_churn_rate):
         # Define figure size of 8 inches by 5 inches
         plt.figure(figsize = (8, 5))
         # Create barplot using sns 
@@ -65,7 +64,7 @@ class UsageFrequencyAnalysis(BaseAnalysis):
             # y axis represent values of each usage rate group
             # coolwarm as color pallete
             # Set color status based on usage churn rate
-        sns.barplot(x = usage_churn_rate.index, y = usage_churn_rate.values, palette = "coolwarm", hue = usage_churn_rate.index)
+        sns.barplot(x = usage_churn_rate.index, y = usage_churn_rate.values, palette = "mako", hue = usage_churn_rate.index)
         plt.title("Churn Rate by Usage Rate Group") # Figure title
         plt.ylabel("Churn Rate (%)") # label for y axis
         plt.xlabel("Usage Rate Group") # label for x axis

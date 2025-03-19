@@ -25,7 +25,7 @@ class TenureAnalysis(BaseAnalysis):
         # Tenure Distribution
         self.tenure_group_distribution(df)
         print("Creating Tenure Distribution: ")
-        print(df["Tenure Group"].head())
+        self.tenure_visualization(df)
         
         # Tenure Churn Rate by Group
         tenure_churn_rate = self.churn_rate_by_group(df)
@@ -45,7 +45,14 @@ class TenureAnalysis(BaseAnalysis):
         elif tenure >= 13 and tenure <= 36:
             return "Engage"
         elif tenure >= 37:
-            return "Loyal" 
+            return "Loyal"
+    
+    def tenure_visualization(self, df):
+        plt.figure(figsize = (8, 5))
+        sns.countplot(x = "Tenure Group", data = df, palette = "viridis", hue = "Tenure Group")
+        plt.title("Tenure Group of Customers")
+        plt.xlabel("Tenure")
+        plt.ylabel("Frequency")    
     
     # Create tenure group by applying categorize_tenure method
     def tenure_group_distribution(self, df):
@@ -64,7 +71,7 @@ class TenureAnalysis(BaseAnalysis):
             # y axis represent values of churn rate for each tenure group
             # coolwarm as color pallete
             # color status by tenure_churn_rate index
-        sns.barplot(x = tenure_churn_rate.index, y = tenure_churn_rate.values, palette = "coolwarm", hue = tenure_churn_rate.index)
+        sns.barplot(x = tenure_churn_rate.index, y = tenure_churn_rate.values, palette = "magma", hue = tenure_churn_rate.index)
         plt.title("Churn Rate by Tenure Group") # Title of figure
         plt.ylabel("Churn Rate (%)") # Label of y axis
         plt.xlabel("Tenure Group") # Label of x axis
