@@ -3,3 +3,5 @@ __pycache__/
 
 # Ignore tempCodeRunnerFile
 **/tempCodeRunnerFile.py
+
+../.DS_Store
