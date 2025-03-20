@@ -24,6 +24,7 @@ The goal of the project is to analyze customer churn dataset to find key factors
 - **Age Analysis:** Create age distribution and analyst churn rate by age group, age is typically divided into 3 categories which are Young, Middle and Old. 
 - **Churn Analysis:** Measuring the overall churn rate in the dataset which usually expressed on percentage.
 - **Contract Length Analysis:** Analyst the impact of contract length on churn rate. It is expressed as Monthly, Annually or Quarterly.
+- **Tenure Analysis:** Analyze does the amount of time customers have been with the company impact on churn.
 - **Correlation Analysis:** Discover the overall correlation between all features (age, tenure, support calls, …) and churn rate. 
 - **Gender Analysis:** Analyst churn rate by gender group which are male and female. 
 - **Last Interaction Analysis:** Analyze the correlation between recent interactions and churn rate. Last interaction is typically measured in days. 
