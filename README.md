@@ -54,7 +54,7 @@ Understanding Dataset
 |Subscription Type|Type of service subscription|
 |Contract Length|Duration of customers contract|
 |Total Spend|Total money customers spend on the service|
-|Last Interaction|The number of months since customer last use of service|
+|Last Interaction|The number of days since customer last use of service|
 |Churn|Binary value indicate customer **churn (1)** or **non-churn (0)**|
 
 ### Project Structure
